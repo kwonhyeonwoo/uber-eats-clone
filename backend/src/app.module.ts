@@ -1,10 +1,13 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { CommonModule } from './common/common.module';
 import { User } from './user/entites/user.entity';
-import { AuthModule } from './jwt/jwt.module';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
+import { AuthModule } from './auth/auth.module';
+import { JwtModule } from './jwt/jwt.module';
+import { Verification } from './user/entites/verification';
 
 @Module({
   imports: [
@@ -19,15 +22,26 @@ import { AuthModule } from './jwt/jwt.module';
         username: process.env.DATABASE_USERNAME,
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
-        entities: [User],
+        entities: [User, Verification],
         synchronize: process.env.DATABASE_SYNCHRONIZE === 'true',
       })
     }),
     UserModule,
     CommonModule,
     AuthModule,
+    JwtModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+
+  ],
 })
-export class AppModule { }
+// export class AppModule { }
+
+
+// logger middelware 설정
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): any {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
