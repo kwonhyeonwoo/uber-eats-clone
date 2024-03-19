@@ -1,0 +1,9 @@
+#root {
+    .restaurant-register-page {
+        &>.restaurant-register-section {
+            &>.restaurant-register-wrapper {
+                &>.restaurant-register-form {}
+            }
+        }
+    }
+}

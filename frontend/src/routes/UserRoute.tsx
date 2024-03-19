@@ -8,7 +8,7 @@ const UserRoute = () => {
     return (
         <Routes>
             <Route path='signin' element={<SignInContainer />} />
-            <Route path='singup' element={<SignupContainer />} />
+            <Route path='signup' element={<SignupContainer />} />
             <Route path='update' element={<UserUpdateContainer />} />
         </Routes>
     );
