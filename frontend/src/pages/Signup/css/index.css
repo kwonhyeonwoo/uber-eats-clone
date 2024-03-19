@@ -1,0 +1,97 @@
+#root .signup-page > .signup-section {
+  padding-top: 90px;
+}
+#root .signup-page > .signup-section > .signup-wrapper {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .title {
+  font-size: 39px;
+  font-weight: 700;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .title > .color-text {
+  color: rgb(22, 163, 74);
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form {
+  width: 544px;
+  margin-top: 33px;
+  padding: 22px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 10px;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  row-gap: 18px;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .sub-title {
+  color: rgb(45, 49, 64);
+  font-size: 25px;
+  font-weight: 500;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .input {
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+  padding-left: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .input:focus {
+  border-color: rgb(22, 163, 74);
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .input ::-webkit-input-placeholder {
+  font-size: 22px;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .input ::-moz-placeholder {
+  font-size: 22px;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .input :-ms-input-placeholder {
+  font-size: 22px;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .input ::-ms-input-placeholder {
+  font-size: 22px;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .input ::placeholder {
+  font-size: 22px;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .button {
+  width: 100%;
+  height: 44px;
+  background-color: rgb(209, 212, 220);
+  font-weight: 600;
+  color: white;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  font-size: 18px;
+  font-weight: 700;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .button:hover {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background-color: rgb(22, 163, 74);
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .link-text {
+  font-size: 17px;
+  margin-top: 11px;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .link-text > .link-color {
+  color: rgb(22, 163, 74);
+}
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .err-msg {
+  color: red;
+}

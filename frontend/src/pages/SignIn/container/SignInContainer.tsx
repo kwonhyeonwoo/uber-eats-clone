@@ -10,6 +10,7 @@ const SignInContainer = () => {
         email: '',
         password: ''
     })
+    const [err, setErr] = useState<string | null>(null);
     const ChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name } = event.target;
         setData((current) => ({
@@ -35,12 +36,14 @@ const SignInContainer = () => {
         }
         if (!response.ok) {
             console.log('404', responseData)
+            setErr(responseData.message)
         }
     }
     return (
         <SignIn
             Submit={Submit}
             Change={ChangeData}
+            errMsg={err}
         />
     );
 };
