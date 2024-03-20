@@ -85,13 +85,13 @@
   transition: all 0.2s ease-in-out;
   background-color: rgb(22, 163, 74);
 }
-#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .link-text {
+#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .err-msg {
+  color: red;
+}
+#root .signup-page > .signup-section > .signup-wrapper > .link-text {
   font-size: 17px;
   margin-top: 11px;
 }
-#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .link-text > .link-color {
+#root .signup-page > .signup-section > .signup-wrapper > .link-text > .link-color {
   color: rgb(22, 163, 74);
-}
-#root .signup-page > .signup-section > .signup-wrapper > .signup-form > .err-msg {
-  color: red;
 }

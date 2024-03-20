@@ -1,0 +1,16 @@
+#root {
+    .header {
+        width: 100%;
+        height: 42px;
+        position: fixed;
+        background-color: white;
+        color: red;
+        font-size: 30px;
+        font-weight: 500;
+        padding: 14px;
+
+        span {
+            color: rgba(22, 163, 74, 1);
+        }
+    }
+}

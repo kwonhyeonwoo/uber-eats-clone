@@ -2,6 +2,8 @@ import React from 'react';
 import "./css/index.css";
 import { Link } from 'react-router-dom';
 import { ErrType } from './container/SignupContainer';
+import UserUpdate from '../UserUpdate/UserUpdate';
+import UserForm from '../../components/UserForm/UserForm';
 type Props = {
     Change: (event: React.ChangeEvent<HTMLInputElement>) => void;
     Submit: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -15,7 +17,19 @@ const SignIn = ({ Change, Submit, errMsg }: Props) => {
                     <div className='title'>
                         Uber <span className='color-text'>Eats</span>
                     </div>
-                    <form className='signup-form'>
+                    <UserForm
+                        content={inputArr}
+                        Submit={Submit}
+                        ChangeData={Change}
+                        text='Account'
+                        title='Welcome Back'
+                    />
+                    <Link className='link-text' to={'/user/signin'}>
+
+                        Are you already a member? <span className='link-color'>Login &rarr;</span></Link>
+                    {errMsg.existsErr && <div className='err-msg'>{errMsg.existsErr}</div>}
+                    {errMsg.passwordErr && <div className='err-msg'>{errMsg.passwordErr}</div>}
+                    {/* <form className='signup-form'>
 
                         <div className='sub-title'>Welcome Back</div>
                         {inputArr.map(({ type, name, placeholder }, idx) => (
@@ -29,11 +43,8 @@ const SignIn = ({ Change, Submit, errMsg }: Props) => {
                             />
                         ))}
                         <button onClick={Submit} className='button'>Login</button>
-                        <Link className='link-text' to={'/user/signin'}>
-                            Already have an account? <span className='link-color'>Login &rarr;</span></Link>
-                        {errMsg.existsErr && <div className='err-msg'>{errMsg.existsErr}</div>}
-                        {errMsg.passwordErr && <div className='err-msg'>{errMsg.passwordErr}</div>}
-                    </form>
+                        
+                    </form> */}
                 </div>
             </section>
         </main>

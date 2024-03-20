@@ -1,10 +1,12 @@
 import React from 'react';
 import "./css/index.css";
 import { Link } from 'react-router-dom';
+import UserForm from '../../components/UserForm/UserForm';
+import { ErrType } from '../Signup/container/SignupContainer';
 type Props = {
     Change: (event: React.ChangeEvent<HTMLInputElement>) => void;
     Submit: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    errMsg: string | null;
+    errMsg: ErrType
 }
 const SignIn = ({ Change, Submit, errMsg }: Props) => {
     console.log('err', errMsg)
@@ -15,23 +17,17 @@ const SignIn = ({ Change, Submit, errMsg }: Props) => {
                     <div className='title'>
                         Uber <span className='color-text'>Eats</span>
                     </div>
-                    <form className='signin-form'>
-
-                        <div className='sub-title'>Welcome Back</div>
-                        {inputArr.map(({ type, name, placeholder }, idx) => (
-                            <input
-                                type={type}
-                                name={name}
-                                placeholder={placeholder}
-                                onChange={Change}
-                                key={idx}
-                                className='input'
-                            />
-                        ))}
-                        <button onClick={Submit} className='button'>Login</button>
-                        <Link className='link-text' to={'/user/signup'}>New to Uber? <span className='link-color'>Create on Account</span></Link>
-                        {errMsg && <div className='err-msg'>{errMsg}</div>}
-                    </form>
+                    <UserForm
+                        content={inputArr}
+                        Submit={Submit}
+                        ChangeData={Change}
+                        text='Login'
+                        title='Welcome Back'
+                    />
+                    <Link className='link-text' to={'/user/signup'}>
+                        Already have an account? <span className='link-color'>Account &rarr;</span></Link>
+                    {errMsg.existsErr && <div className='err-msg'>{errMsg.existsErr}</div>}
+                    {errMsg.passwordErr && <div className='err-msg'>{errMsg.passwordErr}</div>}
                 </div>
             </section>
         </main>

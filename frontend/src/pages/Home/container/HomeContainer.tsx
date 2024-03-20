@@ -16,7 +16,7 @@ const HomeContainer = () => {
             console.log('data', data)
         }
         fetchData();
-    }, [])
+    }, [token])
     return (
         <Home />
     );

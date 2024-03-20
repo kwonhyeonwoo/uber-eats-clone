@@ -68,17 +68,19 @@
                         }
                     }
 
-                    &>.link-text {
-                        font-size: 17px;
-                        margin-top: 11px;
 
-                        &>.link-color {
-                            color: rgba(22, 163, 74, 1);
-                        }
-                    }
 
                     &>.err-msg {
                         color: red;
+                    }
+                }
+
+                &>.link-text {
+                    font-size: 17px;
+                    margin-top: 11px;
+
+                    &>.link-color {
+                        color: rgba(22, 163, 74, 1);
                     }
                 }
             }
