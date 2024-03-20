@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Post, Put, Req, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Patch, Post, Put, Req, Res, UseGuards } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { CreateAccount } from "./dtos/create-account.dto";
 import { LoginType } from "./dtos/login.dto";
 import { AuthGuard } from "@nestjs/passport";
 import { UserUpdate } from "./dtos/user-update";
+import { AuthGuards } from "src/auth/auth.guard";
+import { JwtStrategy } from "src/jwt/jwt.strategy";
 
 @Controller('users')
 export class UserController {
@@ -13,29 +15,24 @@ export class UserController {
     ) { }
 
     @Post('/signup')
-    signup(@Body() body: CreateAccount) {
-        console.log('controller ', body)
-        return this.userService.signup(body);
+    signup(@Body() body: CreateAccount, @Res() res) {
+        return this.userService.signup(body, res);
     }
 
     @Post('/signin')
     signin(@Body() body: LoginType, @Res() res) {
-        console.log(body)
         return this.userService.signin(body, res)
     }
 
     @Get('/profile')
     @UseGuards(AuthGuard('jwt'))
-    async profile(@Req() req) {
-        console.log('dldldl', req.user)
-        return this.userService.profile(req.user.email)
+    async profile(@Req() req, @Res() res) {
+        return this.userService.profile(req.user, res)
     }
 
-    @UseGuards(AuthGuard('jwt'))
-    @Put('/update')
-    async update(@Body() body: UserUpdate, @Req() req) {
-        console.log('req', req.user)
-        console.log('body', body.email);
-        return this.userService.update(body, req.user.userId)
+    @UseGuards(JwtStrategy)
+    @Patch('/update')
+    async update(@Body() body: UserUpdate, @Req() req, @Res() res) {
+        return this.userService.update(body, req.user, res)
     }
 }

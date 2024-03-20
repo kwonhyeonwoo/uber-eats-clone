@@ -14,17 +14,16 @@ export class AuthService {
 
     // JWT 토큰 발급
     async login(user: any) {
-        console.log('12', user)
-
+        console.log('jwt token', user)
         const payload = {
             email: user.email,
             sub: user.id
         }
-        console.log('payload', payload)
-        return this.jwtService.sign(payload, {
+        const token = this.jwtService.sign(payload, {
             secret: process.env.JWT_SECRET,
             expiresIn: '24h'
         })
+        return token
 
     }
 }

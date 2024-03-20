@@ -5,5 +5,6 @@ import { User } from "../entites/user.entity";
 export class CreateAccount extends PickType(User, [
     'email',
     'password',
-    'role'
+    'nickName',
+    'name'
 ]) { }

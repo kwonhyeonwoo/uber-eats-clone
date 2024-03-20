@@ -1,6 +1,7 @@
 import { IsBoolean, IsEmail, IsString } from "class-validator";
 import { CoreEntity } from "src/common/entites/core.entity";
-import { Column, Entity } from "typeorm";
+import { Restaurants } from "src/restaurants/entity/restaurants.entity";
+import { Column, Entity, OneToMany } from "typeorm";
 
 
 type UserRole = 'clinet' | 'owner' | 'delivery'
@@ -11,15 +12,23 @@ export class User extends CoreEntity {
     @IsEmail()
     email: string;
 
-    @Column({ select: false })
+    @Column()
     @IsString()
-    password: string;
+    nickName: string;
 
     @Column()
     @IsString()
-    role: UserRole
+    name: string;
 
-    @Column({ default: false })
-    @IsBoolean()
-    verified: boolean;
+    @Column()
+    @IsString()
+    password: string;
+
+    // @Column()
+    // @IsString()
+    // role: UserRole
+
+
+    @OneToMany((type) => Restaurants, (restaurants) => restaurants.owner)
+    restaurants: Restaurants[]
 }

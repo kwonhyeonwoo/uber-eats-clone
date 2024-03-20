@@ -8,6 +8,9 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from './jwt/jwt.module';
 import { Verification } from './user/entites/verification';
+import { RestaurantsModule } from './restaurants/restaurants.module';
+import { Restaurants } from './restaurants/entity/restaurants.entity';
+import { Category } from './restaurants/entity/category.entity';
 
 @Module({
   imports: [
@@ -22,7 +25,7 @@ import { Verification } from './user/entites/verification';
         username: process.env.DATABASE_USERNAME,
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
-        entities: [User, Verification],
+        entities: [User, Verification, Restaurants, Category],
         synchronize: process.env.DATABASE_SYNCHRONIZE === 'true',
       })
     }),
@@ -30,14 +33,12 @@ import { Verification } from './user/entites/verification';
     CommonModule,
     AuthModule,
     JwtModule,
+    RestaurantsModule,
   ],
   controllers: [],
   providers: [
-
   ],
 })
-// export class AppModule { }
-
 
 // logger middelware 설정
 export class AppModule implements NestModule {

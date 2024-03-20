@@ -1,6 +1,6 @@
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "./entites/user.entity";
-import { Repository } from "typeorm";
+import { Not, Repository } from "typeorm";
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { CreateAccount } from "./dtos/create-account.dto";
 import { LoginType } from "./dtos/login.dto";
@@ -18,30 +18,29 @@ export class UserService {
         private readonly authService: AuthService
     ) { }
 
-    async signup(body: CreateAccount) {
+    async signup(body: CreateAccount, res: Response) {
         try {
-            const { email, role, password } = body;
+            const { email, name, nickName, password } = body;
             const exists = await this.userRepo.findOne({
                 where: { email }
             })
             // 비밀번호 암호화
             const hashedPassword = await bcrypt.hash(password, 5);
-            console.log('body', body)
+
             // 이미 가입 된 이메일이면  error
             if (exists) {
                 // BadRequestException은 400 error 내뱉음
-                throw new BadRequestException('이미 존재하는 이메일 입니다.')
+                return res.status(401).json({
+                    message: "이미 존재하는 이메일 입니다."
+                })
             }
             const user = await this.userRepo.save({
                 email,
-                role,
+                name,
+                nickName,
                 password: hashedPassword
             });
-            return await this.verifications.save(
-                this.verifications.create({
-                    user
-                })
-            )
+            return user;
         } catch (error) {
             console.log(error)
         }
@@ -61,6 +60,7 @@ export class UserService {
 
         //비밀번호 체크
         const matchPassword = await bcrypt.compare(password, user.password);
+        console.log('matchPassword', matchPassword)
         if (!matchPassword) {
             throw new BadRequestException('비밀번호가 올바르지 않습니다.')
         }
@@ -69,23 +69,46 @@ export class UserService {
         return res.status(200).json(token)
     }
 
-
-    async profile(email: string) {
-        const profile = await this.userRepo.findOne({ where: { email } })
-        console.log('user service', profile)
-        return profile
-    }
-
-
-    async update(body: UserUpdate, id: string) {
-        const { email } = body;
-        const exists = await this.userRepo.findOne({
-            where: { email }
-        });
-        if (exists) {
-            throw new BadRequestException('이미 존재하는 이메일 입니다.')
+    async profile(id: number, res: Response) {
+        try {
+            const profile = await this.userRepo.findOne({ where: { id } })
+            if (!profile) {
+                return res.status(400).json({ message: '프로필이없슴' })
+            } else {
+                return res.status(200).json(profile)
+            }
+        } catch (err) {
+            console.log('internet Error', err)
         }
-        const update = await this.userRepo.update(id, body)
-        return update;
     }
+
+    async update(body: UserUpdate, id: number, res: Response) {
+        const { email, nickName, name } = body;
+        const user = await this.userRepo.findOneBy({ id });
+        if (!user) {
+            throw new Error('User not found');
+        };
+        if (email && email !== user.email) {
+            const emailExists = await this.userRepo.findOneBy({ email: email });
+            if (emailExists) {
+                return res.status(400).json({
+                    message: 'Email already in use'
+                });
+            }
+        }
+
+        if (nickName && nickName !== user.nickName) {
+            const nickNameExists = await this.userRepo.findOneBy({ nickName: nickName });
+            if (nickNameExists) {
+                return res.status(400).json({
+                    message: 'NickName already in use'
+                });
+            }
+        }
+
+        Object.assign(user, body);
+        await this.userRepo.save(user);
+        return user;
+    }
+
 }
