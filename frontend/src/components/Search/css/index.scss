@@ -1,0 +1,29 @@
+#root {
+    .search-container {
+        &>.search-form {
+            position: relative;
+
+            input {
+                width: 322px;
+                height: 42px;
+                padding: 10px;
+                box-sizing: border-box;
+                outline: none;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                background-color: white;
+                border-radius: 8px;
+            }
+
+            button {
+                border: none;
+
+                &>.search-icon {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+}

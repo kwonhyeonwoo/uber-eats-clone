@@ -14,7 +14,6 @@ function App() {
 
         <Routes>
           <Route path='/' element={<HomeContainer />} />
-
           <Route path='/user/*' element={<UserRoute />} />
           <Route path='/restaurant/*' element={<RestaurantRoute />} />
         </Routes>

@@ -1,0 +1,15 @@
+#root {
+    .main-page {
+        padding-top: 62px;
+
+        &>.main-section {
+            &>.main-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 428px;
+                background-color: rgba(32, 42, 54, 1);
+            }
+        }
+    }
+}

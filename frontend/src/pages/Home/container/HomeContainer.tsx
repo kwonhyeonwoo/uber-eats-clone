@@ -3,7 +3,6 @@ import Home from '../Home';
 
 const HomeContainer = () => {
     const token = localStorage.getItem('token');
-    console.log(token)
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('http://localhost:4000/users/profile', {
