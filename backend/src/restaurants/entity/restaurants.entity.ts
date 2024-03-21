@@ -27,6 +27,8 @@ export class Restaurants extends CoreEntity {
     )
     category: Category;
 
+    // row 이름 정해줌
+    // JoinColumn안하면 기본 ownerId로 기본설정됨
     @ManyToOne(
         (type) => User,
         (user) => user.restaurants

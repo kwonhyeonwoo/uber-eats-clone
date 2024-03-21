@@ -20,7 +20,7 @@ export class UserService {
 
     async signup(body: CreateAccount, res: Response) {
         try {
-            const { email, name, nickName, password } = body;
+            const { email, name, nickName, password, role } = body;
             const exists = await this.userRepo.findOne({
                 where: { email }
             })
@@ -31,16 +31,25 @@ export class UserService {
             if (exists) {
                 // BadRequestException은 400 error 내뱉음
                 return res.status(401).json({
-                    message: "이미 존재하는 이메일 입니다."
+                    message: "This email already exists."
                 })
             }
-            const user = await this.userRepo.save({
+
+            // 클라이언트인지 검사
+            if (role !== 'client') {
+                return res.status(401).json({
+                    message: 'Please select us as a client.'
+                })
+            }
+
+            await this.userRepo.save({
                 email,
                 name,
                 nickName,
+                role,
                 password: hashedPassword
             });
-            return user;
+            return res.status(200).json({ message: 'Sign up is complete.' })
         } catch (error) {
             console.log(error)
         }

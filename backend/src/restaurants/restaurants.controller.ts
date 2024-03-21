@@ -11,7 +11,7 @@ export class RestaurantsController {
     ) { }
 
 
-    @Post('/create-restaurant')
+    @Post('/create')
     @UseGuards(AuthGuard('jwt'))
     create(
         @Body() body: CreateRestaurant,

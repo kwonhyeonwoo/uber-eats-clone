@@ -6,7 +6,6 @@ export class CreateRestaurant extends PickType(Restaurants, [
     'name',
     'coverImage',
     'address',
-    'id'
 ]) {
     @IsString()
     categoryName: string;

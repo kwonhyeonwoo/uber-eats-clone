@@ -24,11 +24,7 @@ export class User extends CoreEntity {
     @IsString()
     password: string;
 
-    // @Column()
-    // @IsString()
-    // role: UserRole
-
-
-    @OneToMany((type) => Restaurants, (restaurants) => restaurants.owner)
-    restaurants: Restaurants[]
+    @Column()
+    @IsString()
+    role: 'client'
 }

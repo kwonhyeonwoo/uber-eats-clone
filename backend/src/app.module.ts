@@ -11,6 +11,7 @@ import { Verification } from './user/entites/verification';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 import { Restaurants } from './restaurants/entity/restaurants.entity';
 import { Category } from './restaurants/entity/category.entity';
+import { OwnerModule } from './owner/owner.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { Category } from './restaurants/entity/category.entity';
     AuthModule,
     JwtModule,
     RestaurantsModule,
+    OwnerModule,
   ],
   controllers: [],
   providers: [

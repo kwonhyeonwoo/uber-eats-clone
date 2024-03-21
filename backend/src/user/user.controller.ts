@@ -16,6 +16,7 @@ export class UserController {
 
     @Post('/signup')
     signup(@Body() body: CreateAccount, @Res() res) {
+        console.log(body)
         return this.userService.signup(body, res);
     }
 
