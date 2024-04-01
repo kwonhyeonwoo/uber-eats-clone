@@ -3,6 +3,7 @@ import { CoreEntity } from "src/common/entites/core.entity";
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { Category } from "./category.entity";
 import { User } from "src/user/entites/user.entity";
+import { Owner } from "src/owner/entites/owner.entity";
 
 @Entity()
 export class Restaurants extends CoreEntity {
@@ -20,19 +21,16 @@ export class Restaurants extends CoreEntity {
     address: string;
 
     @ManyToOne(
-        (type) => Category,
+        () => Category,
         (category) => category.restaurants,
         { nullable: true, onDelete: "SET NULL" }
-
     )
     category: Category;
 
-    // row 이름 정해줌
-    // JoinColumn안하면 기본 ownerId로 기본설정됨
     @ManyToOne(
-        (type) => User,
-        (user) => user.restaurants
+        () => Owner,
+        (owner) => owner.restaurants,
+        { nullable: true, onDelete: "SET NULL" }
     )
-    @JoinColumn({ name: 'ownerId' })
-    owner: User;
+    owner: Owner;
 }

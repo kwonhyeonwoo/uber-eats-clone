@@ -7,14 +7,14 @@ import { Restaurants } from "./restaurants.entity";
 export class Category extends CoreEntity {
     @Column()
     @IsString()
-    name: string;
+    name: 'Chicken' | 'Shish' | 'Piza' | 'Burger' | 'Pasta' | 'Chinese';
 
     @Column()
     @IsString()
     coverImage: string;
 
     @OneToMany(
-        (type) => Restaurants,
+        () => Restaurants,
         (restaurant) => restaurant.category
     )
     restaurants: Restaurants[]

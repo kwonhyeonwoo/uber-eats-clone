@@ -6,12 +6,15 @@ import { CommonModule } from './common/common.module';
 import { User } from './user/entites/user.entity';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { AuthModule } from './auth/auth.module';
-import { JwtModule } from './jwt/jwt.module';
-import { Verification } from './user/entites/verification';
 import { RestaurantsModule } from './restaurants/restaurants.module';
+import { OwnerModule } from './owner/owner.module';
+import { Owner } from './owner/entites/owner.entity';
+import { DeliveryModule } from './delivery/delivery.module';
+import { Auth } from './auth/entites/auth.entity';
+import { Delivery } from './delivery/entity/delivery.entiy';
 import { Restaurants } from './restaurants/entity/restaurants.entity';
 import { Category } from './restaurants/entity/category.entity';
-import { OwnerModule } from './owner/owner.module';
+import { JwtTokenModule } from './jwt/jwt.module';
 
 @Module({
   imports: [
@@ -26,16 +29,17 @@ import { OwnerModule } from './owner/owner.module';
         username: process.env.DATABASE_USERNAME,
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
-        entities: [User, Verification, Restaurants, Category],
+        entities: [Auth, User, Owner, Delivery, Restaurants, Category],
         synchronize: process.env.DATABASE_SYNCHRONIZE === 'true',
       })
     }),
     UserModule,
     CommonModule,
     AuthModule,
-    JwtModule,
+    JwtTokenModule,
     RestaurantsModule,
     OwnerModule,
+    DeliveryModule,
   ],
   controllers: [],
   providers: [
