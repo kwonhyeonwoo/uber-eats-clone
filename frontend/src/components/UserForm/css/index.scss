@@ -47,5 +47,27 @@
                 background-color: rgba(22, 163, 74, 1);
             }
         }
+
+        &>.role-wrapper {
+            display: flex;
+            justify-content: space-between;
+
+            &>.role-button {
+                width: 122px;
+                height: 43px;
+                border-radius: 9px;
+                color: white;
+                background-color: rgba(209, 212, 220, 1);
+
+                &:hover {
+                    transition: all .2s ease-in-out;
+                    background-color: rgba(22, 163, 74, 1);
+                }
+            }
+
+            &>.selected-role {
+                background-color: rgba(22, 163, 74, 1);
+            }
+        }
     }
 }

@@ -62,3 +62,26 @@
   transition: all 0.2s ease-in-out;
   background-color: rgb(22, 163, 74);
 }
+#root .user-update-form > .role-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+#root .user-update-form > .role-wrapper > .role-button {
+  width: 122px;
+  height: 43px;
+  border-radius: 9px;
+  color: white;
+  background-color: rgb(209, 212, 220);
+}
+#root .user-update-form > .role-wrapper > .role-button:hover {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background-color: rgb(22, 163, 74);
+}
+#root .user-update-form > .role-wrapper > .selected-role {
+  background-color: rgb(22, 163, 74);
+}

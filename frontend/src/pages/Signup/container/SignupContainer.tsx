@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { FormEventHandler, useState } from 'react';
 import Signup from '../Signup';
-import { UserInterface } from '../../../interfaces/list/list.interface';
+import { Role, UserInterface } from '../../../interfaces/list/list.interface';
+import { useNavigate } from 'react-router-dom';
 
 export type ErrType = {
     existsErr: String;
@@ -8,11 +9,13 @@ export type ErrType = {
 }
 
 const SignupContainer = () => {
+    const navigate = useNavigate();
     const [data, setData] = useState<UserInterface>({
         email: '',
         password: '',
         nickName: '',
         name: '',
+        role: '',
         passwordCheck: ''
     })
     const [error, setError] = useState<ErrType>({
@@ -26,8 +29,14 @@ const SignupContainer = () => {
             ...current,
             [name]: value
         }))
+        console.log(data)
     }
-
+    const RoleClick = (item: string) => {
+        setData((current) => ({
+            ...current,
+            role: item
+        }))
+    }
     const Submit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         if (data.password !== data.passwordCheck) {
@@ -37,7 +46,7 @@ const SignupContainer = () => {
             }))
             return;
         }
-        const response = await fetch('http://localhost:4000/users/signup', {
+        const response = await fetch('http://localhost:4000/auth/signup', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -46,7 +55,8 @@ const SignupContainer = () => {
                 email: data.email,
                 password: data.password,
                 nickName: data.nickName,
-                name: data.name
+                name: data.name,
+                role: data.role
             })
         })
         const responseData = await response.json();
@@ -58,6 +68,13 @@ const SignupContainer = () => {
             }))
             console.log('err', error)
         }
+        if (!response.ok) {
+            console.log('ddd', responseData)
+        }
+        if (response.status === 200) {
+            console.log('responseData', responseData)
+            return navigate('/signin')
+        }
         return;
     }
     return (
@@ -65,6 +82,8 @@ const SignupContainer = () => {
             Change={ChangeData}
             Submit={Submit}
             errMsg={error}
+            RoleClick={RoleClick}
+            data={data}
         />
     );
 };

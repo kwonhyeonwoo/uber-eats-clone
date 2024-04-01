@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import SignIn from '../SignIn';
-import { UserInterface, Role } from '../../../interfaces/list/list.interface';
 import { ErrType } from '../../Signup/container/SignupContainer';
 type Signin = {
     email: string;
@@ -25,7 +24,7 @@ const SignInContainer = () => {
 
     const Submit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        const response = await fetch('http://localhost:4000/users/signin', {
+        const response = await fetch('http://localhost:4000/auth/signin', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -33,10 +32,12 @@ const SignInContainer = () => {
             body: JSON.stringify(data)
         });
         const responseData = await response.json();
-
+        if (!response.ok) {
+            console.log('dddd', responseData)
+        }
         if (response.ok) {
             console.log('data', responseData)
-            localStorage.setItem('token', responseData);
+            localStorage.setItem('token', responseData.access_token);
         }
 
     }

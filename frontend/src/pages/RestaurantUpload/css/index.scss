@@ -1,0 +1,9 @@
+#root {
+    .restaurant-upload-page {
+        &>.restaurant-upload-section {
+            &>.restaurant-upload-wrapper {
+                &>.restaurant-upload-form {}
+            }
+        }
+    }
+}

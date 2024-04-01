@@ -2,14 +2,16 @@ import React from 'react';
 import "./css/index.css";
 import { Link } from 'react-router-dom';
 import { ErrType } from './container/SignupContainer';
-import UserUpdate from '../UserUpdate/UserUpdate';
 import UserForm from '../../components/UserForm/UserForm';
+import { UserInterface } from '../../interfaces/list/list.interface';
 type Props = {
     Change: (event: React.ChangeEvent<HTMLInputElement>) => void;
     Submit: (event: React.MouseEvent<HTMLButtonElement>) => void;
     errMsg: ErrType;
+    RoleClick?: (item: string) => void;
+    data: UserInterface
 }
-const SignIn = ({ Change, Submit, errMsg }: Props) => {
+const SignIn = ({ Change, Submit, errMsg, RoleClick, data }: Props) => {
     return (
         <main className='signup-page'>
             <section className='signup-section'>
@@ -23,33 +25,24 @@ const SignIn = ({ Change, Submit, errMsg }: Props) => {
                         ChangeData={Change}
                         text='Account'
                         title='Welcome Back'
+                        type='signup'
+                        role={roleArr}
+                        RoleClick={RoleClick}
+                        data={data}
                     />
                     <Link className='link-text' to={'/user/signin'}>
+                        Are you already a member? <span className='link-color'>Login &rarr;</span>
+                    </Link>
 
-                        Are you already a member? <span className='link-color'>Login &rarr;</span></Link>
                     {errMsg.existsErr && <div className='err-msg'>{errMsg.existsErr}</div>}
                     {errMsg.passwordErr && <div className='err-msg'>{errMsg.passwordErr}</div>}
-                    {/* <form className='signup-form'>
-
-                        <div className='sub-title'>Welcome Back</div>
-                        {inputArr.map(({ type, name, placeholder }, idx) => (
-                            <input
-                                type={type}
-                                name={name}
-                                placeholder={placeholder}
-                                onChange={Change}
-                                key={idx}
-                                className='input'
-                            />
-                        ))}
-                        <button onClick={Submit} className='button'>Login</button>
-                        
-                    </form> */}
                 </div>
             </section>
         </main>
     );
 };
+const roleArr = ['client', 'owner', 'delivery']
+
 const inputArr = [
     {
         type: 'email',

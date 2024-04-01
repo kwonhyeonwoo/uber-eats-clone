@@ -9,7 +9,6 @@ type Props = {
     errMsg: ErrType
 }
 const SignIn = ({ Change, Submit, errMsg }: Props) => {
-    console.log('err', errMsg)
     return (
         <main className='signin-page'>
             <section className='signin-section'>
@@ -24,8 +23,11 @@ const SignIn = ({ Change, Submit, errMsg }: Props) => {
                         text='Login'
                         title='Welcome Back'
                     />
+
                     <Link className='link-text' to={'/user/signup'}>
-                        Already have an account? <span className='link-color'>Account &rarr;</span></Link>
+                        Already have an account? <span className='link-color'>Account &rarr;</span>
+                    </Link>
+
                     {errMsg.existsErr && <div className='err-msg'>{errMsg.existsErr}</div>}
                     {errMsg.passwordErr && <div className='err-msg'>{errMsg.passwordErr}</div>}
                 </div>

@@ -5,7 +5,7 @@ const HomeContainer = () => {
     const token = localStorage.getItem('token');
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:4000/users/profile', {
+            const response = await fetch('http://localhost:4000/auth/profile', {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`, // 토큰을 Authorization 헤더에 포함

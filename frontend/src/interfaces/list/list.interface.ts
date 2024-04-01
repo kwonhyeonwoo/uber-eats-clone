@@ -5,5 +5,5 @@ export type UserInterface = {
     nickName: String;
     name: String;
     passwordCheck: String
-    role?: Role,
+    role: string;
 }
